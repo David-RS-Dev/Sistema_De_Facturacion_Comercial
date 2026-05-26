@@ -833,3 +833,17 @@ main p em {
         display: none !important;
     }
 }
+
+/* ============================================================
+   16. AJUSTES PERSONALIZADOS - BIENVENIDA
+   ============================================================ */
+
+/* Asegura que el subtítulo baje y tenga la jerarquía correcta */
+.subtitulo-home {
+    display: block;               /* Obliga a bajar a la siguiente línea */
+    font-size: 0.95rem;           /* Tamaño ideal para contrastar con el h3 */
+    font-weight: 400;             /* Texto normal (no negrita) para descansar la vista */
+    margin-top: 6px;              /* Separa el texto para que no se vea amontonado */
+    color: var(--texto-secundario);/* Usa tu variable gris corporativa */
+    text-align: inherit;          /* Sigue la alineación de su elemento padre */
+}
