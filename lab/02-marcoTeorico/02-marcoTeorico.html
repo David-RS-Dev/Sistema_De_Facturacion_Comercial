@@ -236,6 +236,48 @@
                     </table>
                 </details>
 
+                <!-- PRÁCTICA INTERACTIVA TEMA 3 -->
+                <details class="subtema calculadora">
+                    <summary>🧮 Práctica Interactiva: Calcular Subtotal</summary>
+                    <form class="calc-form" id="calc-tema3" onsubmit="event.preventDefault();">
+                        
+                        <fieldset class="item-contenedor">
+                            <legend>📦 Item 1 (Ej: Camisas)</legend>
+                            <div class="inputs-paralelos">
+                                <div class="input-group">
+                                    <label for="cant-t3-p1">Cantidad:</label>
+                                    <input type="number" id="cant-t3-p1" min="1" value="2" required>
+                                </div>
+                                <div class="input-group">
+                                    <label for="precio-t3-p1">Precio Unit. ($):</label>
+                                    <input type="number" id="precio-t3-p1" step="0.01" min="0" value="25.00" required>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <fieldset class="item-contenedor">
+                            <legend>📦 Item 2 (Ej: Pantalones)</legend>
+                            <div class="inputs-paralelos">
+                                <div class="input-group">
+                                    <label for="cant-t3-p2">Cantidad:</label>
+                                    <input type="number" id="cant-t3-p2" min="1" value="1" required>
+                                </div>
+                                <div class="input-group">
+                                    <label for="precio-t3-p2">Precio Unit. ($):</label>
+                                    <input type="number" id="precio-t3-p2" step="0.01" min="0" value="40.00" required>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <button type="button" id="btn-calc-tema3" class="btn-calcular">
+                            Calcular Subtotal
+                        </button>
+                        
+                        <div class="resultado-flujo" id="res-tema3" aria-live="polite">
+                        </div>
+                    </form>
+                </details>
+
                 <details class="subtema">
                     <summary>📌 Importancia y Conclusión</summary>
                     <p><strong>Importancia:</strong> El subtotal sirve como base para calcular el IVA, descuentos, retenciones y el total final.</p>
