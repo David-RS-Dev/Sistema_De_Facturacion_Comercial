@@ -1,165 +1,174 @@
-// 01-facturacion.js
-// === ESTADO DE LA APLICACIÓN ===
-// Empezamos con el primer producto ya cargado en el arreglo de memoria
-let productosParaFacturar = [
-    { id: 1, cantidad: 1, descripcion: "", precio: 0.00 }
+// Base de datos de productos según especificaciones SRI de Ecuador
+const baseDatosProductos = [
+    { id: "P001", descripcion: "Hospedaje Familiar (Noche) - Actividad Turística", precio: 45.00, aplicaIvaReducido: true },
+    { id: "P002", descripcion: "Almuerzo Turístico / Gastronomía Autorizada", precio: 12.50, aplicaIvaReducido: true },
+    { id: "P003", descripcion: "Tour Operado Centro Histórico Quito", precio: 25.00, aplicaIvaReducido: true },
+    { id: "P004", descripcion: "Bebida Energizante Importada", precio: 3.50, aplicaIvaReducido: false },
+    { id: "P005", descripcion: "Souvenir / Artesanía Local", precio: 15.00, aplicaIvaReducido: false }
 ];
 
-// Usamos este número para que los nuevos productos tengan IDs únicos (2, 3, 4...)
-let contadorIds = 1; 
+// Matriz de Feriados Nacionales en formato ISO
+const feriadosActivos = [
+    "2026-05-24", // Batalla de Pichincha
+    "2026-08-10", // Primer Grito de Independencia
+    "2026-11-02", // Día de los Difuntos
+    "2026-11-03"  // Independencia de Cuenca
+];
 
-// === GESTIÓN DE LA TABLA (INTERFAZ) ===
-function pintarProductos() {
-    let cuerpoTabla = document.getElementById("cuerpoTabla");
-    if (!cuerpoTabla) return; // Si no está la tabla (ej. en la portada), no hace nada
+let esFeriadoVigente = false;
 
-    cuerpoTabla.innerHTML = ""; // Limpiamos por completo la pantalla para redibujar
+// Configuración inicial de la interfaz
+document.addEventListener("DOMContentLoaded", () => {
+    const hoy = new Date().toISOString().split('T')[0];
+    document.getElementById("fechaFactura").value = hoy;
+    
+    renderizarFeriadosAuxiliares();
+    evaluarEstadoFiscal();
+});
 
-    // Recorremos nuestro arreglo global para dibujar fila por fila
-    for (let i = 0; i < productosParaFacturar.length; i++) {
-        let prod = productosParaFacturar[i];
-        let totalFila = prod.cantidad * prod.precio;
-
-        cuerpoTabla.innerHTML += `
-            <tr id="fila-${prod.id}">
-                <td>
-                    <input type="number" id="cantidad-${prod.id}" 
-                    value="${prod.cantidad}" 
-                    onfocus="this.select()"
-                    oninput="actualizarProducto(${prod.id}, 'cantidad', this.value)" 
-                    placeholder="0">
-                </td>
-                <td>
-                    <input type="text" 
-                    value="${prod.descripcion}"
-                    onfocus="this.select()" 
-                    oninput="actualizarProducto(${prod.id}, 'descripcion', this.value)" 
-                    placeholder="Descripción del producto">
-                </td>
-                <td>
-                    <input type="number" id="precio-${prod.id}" 
-                    value="${prod.precio.toFixed(2)}" 
-                    onfocus="this.select()"
-                    oninput="actualizarProducto(${prod.id}, 'precio', this.value)" 
-                    placeholder="0.00">
-                </td>
-                <td><span id="total-fila-${prod.id}">${totalFila.toFixed(2)}</span></td>
-                <td>
-                    <button type="button" onclick="eliminarProducto(${prod.id})">ELIMINAR</button>
-                </td>
-            </tr>
-        `;
-    }
-
-    // Cada vez que pintamos la tabla, recalculamos los totales generales abajo
-    calcularTotal();
+function renderizarFeriadosAuxiliares() {
+    const contenedor = document.getElementById("listaFeriadosVisual");
+    contenedor.innerHTML = "";
+    feriadosActivos.forEach(fecha => {
+        const span = document.createElement("span");
+        span.className = "tag-fecha";
+        span.textContent = fecha;
+        contenedor.appendChild(span);
+    });
 }
 
-// === ACCIONES DEL USUARIO ===
+function evaluarEstadoFiscal() {
+    const fechaSeleccionada = document.getElementById("fechaFactura").value;
+    const badge = document.getElementById("badgeFeriado");
+    
+    if (feriadosActivos.includes(fechaSeleccionada)) {
+        esFeriadoVigente = true;
+        badge.textContent = "Feriado Activo (Aplica IVA 8% Turístico)";
+        badge.className = "badge badge-feriado";
+    } else {
+        esFeriadoVigente = false;
+        badge.textContent = "Día Ordinario (IVA 15% General)";
+        badge.className = "badge badge-ordinario";
+    }
+    calcularTotalesFactura();
+}
 
 function agregarProducto() {
-    contadorIds++; // Incrementamos el generador de IDs
+    const cuerpoTabla = document.getElementById("cuerpoTabla");
+    const uniqueId = Date.now();
+    const fila = document.createElement("tr");
+    fila.id = `fila-${uniqueId}`;
 
-    // Creamos el nuevo objeto en blanco
-    let nuevoProd = {
-        id: contadorIds,
-        cantidad: 1,
-        descripcion: "",
-        precio: 0.00
-    };
+    let opcionesSelect = `<option value="" data-precio="0" data-turismo="false">-- Seleccione --</option>`;
+    baseDatosProductos.forEach(prod => {
+        opcionesSelect += `<option value="${prod.id}" data-precio="${prod.precio}" data-turismo="${prod.aplicaIvaReducido}">${prod.descripcion}</option>`;
+    });
 
-    // ¡Lo guardamos de forma segura en la memoria RAM!
-    productosParaFacturar.push(nuevoProd);
-
-    pintarProductos();
+    fila.innerHTML = `
+        <td>
+            <input type="number" class="input-cantidad" value="1" min="1" onchange="actualizarLineaFactura('${uniqueId}')">
+        </td>
+        <td>
+            <select class="select-producto" onchange="seleccionarProductoDesdeDb('${uniqueId}')">
+                ${opcionesSelect}
+            </select>
+        </td>
+        <td>
+            $<span class="precio-unitario">0.00</span>
+        </td>
+        <td>
+            $<span class="total-linea">0.00</span>
+        </td>
+        <td>
+            <button type="button" class="btn-eliminar" onclick="eliminarFila('${uniqueId}')">✕</button>
+        </td>
+    `;
+    cuerpoTabla.appendChild(fila);
 }
 
-function eliminarProducto(idProducto) {
-    for (let i = 0; i < productosParaFacturar.length; i++) {
-        if (productosParaFacturar[i].id === idProducto) {
-            productosParaFacturar.splice(i, 1); 
-            break;
-        }
-    }
-
-    pintarProductos();
+function seleccionarProductoDesdeDb(idFila) {
+    const fila = document.getElementById(`fila-${idFila}`);
+    const select = fila.querySelector(".select-producto");
+    const opcionSeleccionada = select.options[select.selectedIndex];
+    const precio = parseFloat(opcionSeleccionada.getAttribute("data-precio"));
+    
+    fila.querySelector(".precio-unitario").textContent = precio.toFixed(2);
+    actualizarLineaFactura(idFila);
 }
 
-function actualizarCantidad(idProducto, nuevaCantidad) {
-    for (let i = 0; i < productosParaFacturar.length; i++) {
-        if (productosParaFacturar[i].id === idProducto) {
-            productosParaFacturar[i].cantidad = parseFloat(nuevaCantidad) || 0;
-            break;
-        }
-    }
-    calcularTotal()
+function actualizarLineaFactura(idFila) {
+    const fila = document.getElementById(`fila-${idFila}`);
+    const cantidad = parseInt(fila.querySelector(".input-cantidad").value) || 0;
+    const select = fila.querySelector(".select-producto");
+    const opcionSeleccionada = select.options[select.selectedIndex];
+    const precio = parseFloat(opcionSeleccionada.getAttribute("data-precio")) || 0;
+    
+    const totalLinea = cantidad * precio;
+    fila.querySelector(".total-linea").textContent = totalLinea.toFixed(2);
+    
+    calcularTotalesFactura();
 }
 
-function actualizarDescripcion(idProducto, nuevaDescripcion) {
-    for (let i = 0; i < productosParaFacturar.length; i++) {
-        if (productosParaFacturar[i].id === idProducto) {
-            productosParaFacturar[i].descripcion = nuevaDescripcion;
-            break;
-        }
-    }
-    calcularTotal()
+function eliminarFila(idFila) {
+    const fila = document.getElementById(`fila-${idFila}`);
+    if (fila) fila.remove();
+    calcularTotalesFactura();
 }
 
-function actualizarPrecio(idProducto, nuevoPrecio) {
-    for (let i = 0; i < productosParaFacturar.length; i++) {
-        if (productosParaFacturar[i].id === idProducto) {
-            productosParaFacturar[i].precio = parseFloat(nuevoPrecio) || 0;
-            break;
-        }
-    }
-    calcularTotal()
-}
+function calcularTotalesFactura() {
+    let subtotalGeneral = 0;
+    let baseIva15 = 0;
+    let baseIva8 = 0;
 
-function actualizarProducto(idProducto, propiedad, valor) {
-    if (propiedad === "cantidad") {
-        actualizarCantidad(idProducto, valor);
-    } else if (propiedad === "descripcion") {
-        actualizarDescripcion(idProducto, valor);
-    } else if (propiedad === "precio") {
-        actualizarPrecio(idProducto, valor);
-    }
-}
-
-// === LÓGICA DE CÁLCULOS MATEMÁTICOS ===
-function calcularTotal() {
-    let sumaDeTodosLosSubtotales = 0;
-
-    // Sumamos los totales de cada producto directo desde el arreglo de memoria
-    for (let i = 0; i < productosParaFacturar.length; i++) {
-        let prod = productosParaFacturar[i];
-        let totalDeEstaFila = prod.cantidad * prod.precio;
+    const filas = document.querySelectorAll("#cuerpoTabla tr");
+    
+    filas.forEach(fila => {
+        const select = fila.querySelector(".select-producto");
+        if (!select) return;
         
-        // Actualizamos el total de la fila en pantalla
-        let totalFila = document.getElementById("total-fila-" + prod.id);
-        if (totalFila) {
-            totalFila.innerHTML = totalDeEstaFila.toFixed(2);
+        const opcionSeleccionada = select.options[select.selectedIndex];
+        
+        // Si el usuario no ha seleccionado un producto, saltar esta fila
+        if (!opcionSeleccionada || opcionSeleccionada.value === "") return;
+
+        const cantidad = parseInt(fila.querySelector(".input-cantidad").value) || 0;
+        const precio = parseFloat(opcionSeleccionada.getAttribute("data-precio")) || 0;
+        
+        // CORRECCIÓN RADICAL: Forzar la conversión de texto a booleano de forma estricta
+        const aplicaIvaReducido = (opcionSeleccionada.getAttribute("data-turismo") === "true");
+        
+        const totalLinea = cantidad * precio;
+        subtotalGeneral += totalLinea;
+
+        // EVALUACIÓN UNITARIA POR PRODUCTO:
+        if (aplicaIvaReducido && esFeriadoVigente) {
+            // SÓLO si el producto califica para la reducción Y estamos en feriado, va al 8%
+            baseIva8 += totalLinea;
+        } else {
+            // SI EL PRODUCTO NO APLICA (data-turismo="false"), VA DIRECTO AL 15% SIEMPRE.
+            // Si el producto aplica pero NO es feriado, también va directo al 15%.
+            baseIva15 += totalLinea;
         }
+    });
 
-        sumaDeTodosLosSubtotales = sumaDeTodosLosSubtotales + totalDeEstaFila;
-    }
+    // Operaciones matemáticas de impuestos
+    const valorIva15 = baseIva15 * 0.15;
+    const valorIva8 = baseIva8 * 0.08;
+    const totalFinal = subtotalGeneral + valorIva15 + valorIva8;
 
-    // Cálculos de impuestos locales (IVA 15%)
-    let iva = sumaDeTodosLosSubtotales * 0.15;
-    let totalFinal = sumaDeTodosLosSubtotales + iva;
-
-    // Pintamos las etiquetas inferiores de la factura
-    document.getElementById("subtotal").innerHTML = sumaDeTodosLosSubtotales.toFixed(2);
-    document.getElementById("iva").innerHTML = iva.toFixed(2);
-    document.getElementById("totalFinal").innerHTML = totalFinal.toFixed(2);
+    // Inyección limpia y directa en tus etiquetas HTML
+    document.getElementById("subtotal").textContent = subtotalGeneral.toFixed(2);
+    document.getElementById("base15").textContent = baseIva15.toFixed(2);
+    document.getElementById("iva").textContent = valorIva15.toFixed(2); 
+    document.getElementById("base8").textContent = baseIva8.toFixed(2);
+    document.getElementById("iva8").textContent = valorIva8.toFixed(2);
+    document.getElementById("totalFinal").textContent = totalFinal.toFixed(2);
 }
 
-// ---- FUNCIÓN PARA IMPRIMIR ----
+
+
+
+
 function imprimirFactura() {
     window.print();
-}
-
-// ---- INICIALIZACIÓN ----
-// Esto arranca la tabla la primera vez que abres el documento
-if (document.getElementById("cuerpoTabla")) {
-    pintarProductos();
 }
