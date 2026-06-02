@@ -1,10 +1,12 @@
-<!-- 01-facturacion.html -->
 <!DOCTYPE html>
 <html lang="es">
   <head>
     <meta charset="UTF-8">
       <title>Factura Comercial</title>
+      <!-- Archivo de estilos base -->
       <link rel="stylesheet" href="../styles.css">
+      <!-- Archivo de estilos modular específico para Facturación -->
+      <link rel="stylesheet" href="01-facturacion.css">
   </head>
     <body>
         <!-- Este menú se repite en todas las páginas para poder movernos entre ellas -->
@@ -15,6 +17,21 @@
             <a href="../03-guia/03-guia.html"><button>Guía del Proyecto</button></a>
         </nav>
         <hr> <!-- Línea divisoria -->
+
+        <!-- ==================== PANTALLA AUXILIAR (FISCAL) ==================== -->
+        <section class="panel-auxiliar">
+            <h2>⚙️ Parámetros Fiscales (Días Feriados SRI)</h2>
+            <div class="panel-control-fecha">
+                <label for="fechaFactura">Fecha de Emisión de Factura: </label>
+                <input type="date" id="fechaFactura" onchange="evaluarEstadoFiscal()">
+                <span id="badgeFeriado" class="badge badge-ordinario">Día Ordinario (IVA 15%)</span>
+            </div>
+            <div class="panel-fechas-registro">
+                <strong>Feriados Activos Registrados en Base de Datos Interna:</strong>
+                <div id="listaFeriadosVisual" class="tags-feriados"></div>
+            </div>
+        </section>
+        <hr>
 
         <!-- ==================== ENCABEZADO ==================== -->
         <h1>Nombre Comercial</h1>
@@ -56,7 +73,7 @@
         
         <!-- ==================== TABLA DE PRODUCTOS ==================== -->
         <h2>Productos</h2>
-        <button type="button" onclick="agregarProducto()">
+        <button type="button" class="btn-agregar" onclick="agregarProducto()">
             ➕ Agregar Producto
         </button>
         <br><br>
@@ -79,20 +96,31 @@
 
         <!-- ==================== SECCIÓN DE TOTALES ==================== -->
         <hr>
-        <p>
-            <strong>Subtotal:</strong> $<span id="subtotal">0.00</span>
-        </p>
-        <p>
-            <strong>IVA (15%):</strong> $<span id="iva">0.00</span>
-        </p>
-        <h3>
-            TOTAL: $<span id="totalFinal">0.00</span>
-        </h3>
+        <div class="contenedor-totales">
+            <p>
+                <strong>Subtotal:</strong> $<span id="subtotal">0.00</span>
+            </p>
+            <p>
+                <strong>Base Imponible IVA 15%:</strong> $<span id="base15">0.00</span>
+            </p>
+            <p>
+                <strong>IVA (15%):</strong> $<span id="iva">0.00</span>
+            </p>
+            <p class="desglose-iva8">
+                <strong>Base Imponible IVA 8%:</strong> $<span id="base8">0.00</span>
+            </p>
+            <p class="desglose-iva8">
+                <strong>IVA Reducido (8%):</strong> $<span id="iva8">0.00</span>
+            </p>
+            <h3>
+                TOTAL: $<span id="totalFinal">0.00</span>
+            </h3>
+        </div>
         <br>
         <hr>
 
         <!-- ==================== BOTÓN DE IMPRIMIR ==================== -->
-        <button onclick="imprimirFactura()">🖨️ Imprimir Factura</button>
+        <button class="btn-imprimir" onclick="imprimirFactura()">🖨️ Imprimir Factura</button>
         <br>
 
         <script src="01-facturacion.js"></script>
