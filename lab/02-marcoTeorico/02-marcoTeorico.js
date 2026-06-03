@@ -17,10 +17,15 @@ document.addEventListener('DOMContentLoaded', function() {
         let tasa = parseFloat(document.getElementById('tasa-tema1').value);
 
         // Validación: si el usuario dejó vacío o escribió letras, avisamos y salimos
-        if (isNaN(precio) || isNaN(tasa)) {
-            alert("Por favor, ingresa valores numéricos válidos.");
-            return; // Detiene el código aquí para no calcular errores
-        }
+       if (isNaN(precio) || isNaN(tasa)) {
+    alert("Por favor, ingresa valores numéricos válidos.");
+    return;
+}
+
+if (tasa <= 0) {
+    alert("La tasa de IVA debe ser mayor a 0%.");
+    return;
+}
 
         // Hacemos los cálculos matemáticos
         let iva = precio * (tasa / 100);   // Ej: 800 * 0.15 = 120
@@ -177,4 +182,51 @@ document.addEventListener('DOMContentLoaded', function() {
         `;
     });
     
+});
+
+let btn4 = document.getElementById("btn-calc-tema4");
+
+btn4.addEventListener("click", function () {
+
+    let subtotal = parseFloat(document.getElementById("subtotal-tema4").value);
+    let tasa = parseFloat(document.getElementById("iva-tema4").value);
+
+    if (isNaN(subtotal) || isNaN(tasa) || subtotal < 0 || tasa < 0) {
+        alert("Valores inválidos");
+        return;
+    }
+
+    let iva = subtotal * (tasa / 100);
+
+    document.getElementById("res-tema4").innerHTML = `
+        <table class="resultado-tabla">
+            <tr><td>Subtotal</td><td>$${subtotal.toFixed(2)}</td></tr>
+            <tr><td>IVA</td><td>$${iva.toFixed(2)}</td></tr>
+        </table>
+    `;
+});
+
+let btn5 = document.getElementById("btn-calc-tema5");
+
+btn5.addEventListener("click", function () {
+
+    let subtotal = parseFloat(document.getElementById("subtotal-t5").value);
+    let iva = parseFloat(document.getElementById("iva-t5").value);
+    let desc = parseFloat(document.getElementById("desc-t5").value);
+
+    if (isNaN(subtotal) || isNaN(iva) || isNaN(desc)) {
+        alert("Valores inválidos");
+        return;
+    }
+
+    let total = subtotal + iva - desc;
+
+    document.getElementById("res-tema5").innerHTML = `
+        <table class="resultado-tabla">
+            <tr><td>Subtotal</td><td>$${subtotal.toFixed(2)}</td></tr>
+            <tr><td>IVA</td><td>$${iva.toFixed(2)}</td></tr>
+            <tr><td>Descuento</td><td>$${desc.toFixed(2)}</td></tr>
+            <tr><td><strong>Total</strong></td><td><strong>$${total.toFixed(2)}</strong></td></tr>
+        </table>
+    `;
 });

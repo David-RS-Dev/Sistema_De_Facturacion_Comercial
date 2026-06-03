@@ -45,24 +45,36 @@
 
 .resultado-flujo {
     margin-top: 12px;
-    padding: 12px;
+    padding: 16px; /* 🔥 clave: aire interno */
     background: white;
     border-radius: 6px;
     border-left: 4px solid #198754;
+    overflow-x: auto;
 }
 
+.resultado-flujo {
+    margin-top: 12px;
+   
+    padding: 16px 14px; /* equilibrio visual horizontal */
+}
 .resultado-tabla {
     width: 100%;
+    max-width: 100%;
     border-collapse: collapse;
     font-size: 0.95rem;
+    table-layout: fixed; /* 🔥 clave para evitar overflow */
 }
 
-.resultado-tabla th, .resultado-tabla td {
-    padding: 6px 10px;
-    text-align: left;
-    border-bottom: 1px solid #e9ecef;
+.resultado-tabla td,
+.resultado-tabla th {
+    word-wrap: break-word;
+    white-space: normal;
 }
-
+@media (max-width: 768px) {
+    .resultado-tabla {
+        font-size: 0.85rem;
+    }
+}
 .resultado-tabla tr:last-child td { font-weight: bold; border-bottom: none; }
 .resultado-tabla tr:last-child td:last-child { color: #198754; }
 
@@ -113,4 +125,46 @@
     display: block;
     margin-top: 8px;
     font-size: 0.8rem;
+}
+
+/* ====== CONTENEDORES MÁS ROBUSTOS ====== */
+.calc-form {
+    max-width: 520px; /* antes 400px */
+    width: 100%;
+}
+
+/* Evita que tablas rompan el layout */
+.resultado-flujo {
+    overflow-x: auto;
+}
+
+/* Tabla responsive real */
+.resultado-tabla {
+    width: 100%;
+    min-width: 320px;
+}
+
+/* Mejora general de los details */
+.subtema {
+    max-width: 900px;
+}
+
+/* Evita overflow en todo el sistema de tablas */
+table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+/* Evita que cualquier contenido se salga del details */
+.subtema {
+    max-width: 100%;
+    overflow-x: auto;
+    box-sizing: border-box;
+}
+
+/* Contenedor de tablas más robusto */
+.resultado-flujo {
+    overflow-x: auto;
+    width: 100%;
 }
