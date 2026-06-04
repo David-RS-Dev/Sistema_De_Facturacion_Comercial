@@ -80,7 +80,7 @@ function agregarProducto() {
             $<span class="total-linea">0.00</span>
         </td>
         <td>
-            <button type="button" class="btn-eliminar" onclick="eliminarFila('${uniqueId}')">✕</button>
+            <button type="button" class="btn-eliminar" onclick="eliminarFila('${uniqueId}')">Eliminar</button>
         </td>
     `;
     cuerpoTabla.appendChild(fila);
@@ -164,10 +164,6 @@ function calcularTotalesFactura() {
     document.getElementById("iva8").textContent = valorIva8.toFixed(2);
     document.getElementById("totalFinal").textContent = totalFinal.toFixed(2);
 }
-
-
-
-
 
 function imprimirFactura() {
     window.print();

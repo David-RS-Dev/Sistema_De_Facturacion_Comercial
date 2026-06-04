@@ -1,232 +1,202 @@
-/* ==========================================================================
-   HOJA DE ESTILOS ESPECÍFICA: MÓDULO DE FACTURACIÓN (DASHBOARD FISCAL)
-   ========================================================================== */
+/* ============================================================
+   COMPONENTES EXCLUSIVOS: 01-FACTURACION.HTML
+   Estilos específicos del Simulador de Facturación Comercial
+   ============================================================ */
 
-:root {
-    --primary-color: #1e3a8a;
-    --secondary-color: #0d9488;
-    --dark-bg: #0f172a;
-    --light-bg: #f8fafc;
-    --border-color: #cbd5e1;
-    --alert-color: #ef4444;
-    --success-color: #10b981;
-}
-
-/* 1. Componentes del Panel Auxiliar de Feriados */
+/* ============================================================
+   1. PANTALLA AUXILIAR (PARÁMETROS FISCALES SRI)
+   ============================================================ */
 .panel-auxiliar {
-    background-color: var(--light-bg);
-    border: 1px dashed var(--secondary-color);
-    padding: 20px;
-    border-radius: 8px;
-    margin: 20px 0;
-}
-
-.panel-auxiliar h2 {
-    color: var(--primary-color);
-    margin-top: 0;
-    font-size: 1.25rem;
+    background: var(--fondo-app);
+    padding: 1.25rem;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--borde-suave);
+    margin-bottom: 1rem;
 }
 
 .panel-control-fecha {
     display: flex;
-    align-items: center;
-    gap: 15px;
     flex-wrap: wrap;
-    margin-bottom: 15px;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.panel-control-fecha label {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--texto-principal);
 }
 
 .panel-control-fecha input[type="date"] {
-    padding: 8px 12px;
-    border: 1px solid var(--border-color);
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--borde-suave);
     border-radius: 6px;
     font-size: 0.95rem;
+    font-family: inherit;
+    color: var(--texto-principal);
+    background: var(--fondo-contenedor);
+    transition: var(--transicion-suave);
 }
 
-/* Badges Dinámicos de Estado Fiscal */
+.panel-control-fecha input[type="date"]:focus {
+    outline: none;
+    border-color: var(--color-primario);
+    box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.15);
+}
+
+/* Base de los Badges (Etiquetas de Estado Fiscal) */
 .badge {
-    padding: 6px 12px;
-    border-radius: 4px;
-    font-weight: bold;
+    display: inline-block;
+    padding: 0.35rem 0.75rem;
     font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 50px;
     text-transform: uppercase;
+    letter-spacing: 0.03em;
 }
 
+/* Modificadores de Estado según Ley SRI */
 .badge-ordinario {
-    background-color: #fee2e2;
-    color: var(--alert-color);
+    background-color: rgba(30, 58, 138, 0.1);
+    color: var(--color-primario);
+    border: 1px solid rgba(30, 58, 138, 0.2);
 }
 
 .badge-feriado {
-    background-color: #dcfce7;
-    color: var(--success-color);
+    background-color: rgba(16, 185, 129, 0.1);
+    color: var(--color-secundario);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+/* Visualización de las fechas registradas en el sistema */
+.panel-fechas-registro {
+    font-size: 0.9rem;
 }
 
 .tags-feriados {
     display: flex;
-    gap: 8px;
     flex-wrap: wrap;
-    margin-top: 8px;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
 }
 
-.tag-fecha {
-    background-color: #e2e8f0;
-    color: #475569;
-    padding: 4px 10px;
-    border-radius: 20px;
+.tags-feriados span {
+    background: var(--fondo-contenedor);
+    border: 1px solid var(--borde-suave);
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
+    font-family: monospace;
     font-size: 0.85rem;
+    color: var(--texto-secundario);
 }
 
-/* 2. Optimización de Formularios y Inputs de Tabla */
-#formularioCliente {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 15px;
+/* ============================================================
+   2. REGLAS ESPECÍFICAS DE LA TABLA DE PRODUCTOS
+   ============================================================ */
+/* Botón estilizado exclusivo para añadir productos */
+.btn-agregar {
+    background: var(--color-secundario);
+    color: var(--texto-blanco);
 }
 
-#formularioCliente label {
+/* Forzar la alineación y diseño de los campos de totales en la fila */
+td span[id^="total-fila"] {
+    display: block;
+    text-align: right;
     font-weight: 600;
-    color: #475569;
+    color: var(--color-primario);
+    font-family: monospace;
+    font-size: 1rem;
+}
+
+/* ============================================================
+   3. SECCIÓN DE TOTALES DE LA FACTURA (DERECHA Y SEPARADA)
+   ============================================================ */
+.contenedor-totales {
+    max-width: 350px;
+    margin-left: auto; /* Desplaza todo el bloque magnéticamente a la derecha */
     display: flex;
     flex-direction: column;
-    gap: 5px;
-}
-
-#formularioCliente input {
-    padding: 10px;
-    border: 1px solid var(--border-color);
-    border-radius: 6px;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-/* 3. Estilización de la Tabla Dinámica de Productos */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 15px;
-}
-
-th {
-    background-color: var(--primary-color);
-    color: white;
-    padding: 12px;
-    text-align: left;
-}
-
-td {
-    padding: 10px 12px;
-    border-bottom: 1px solid #e2e8f0;
-}
-
-table select, table input[type="number"] {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-
-/* 4. Botones y Elementos de Acción */
-.btn-agregar {
-    background-color: var(--secondary-color);
-    color: white;
-    border: none;
-    padding: 10px 18px;
-    border-radius: 6px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-.btn-agregar:hover {
-    background-color: #0f766e;
-}
-
-.btn-eliminar {
-    background-color: var(--alert-color);
-    color: white;
-    border: none;
-    padding: 6px 12px;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.btn-imprimir {
-    background-color: var(--dark-bg);
-    color: white;
-    border: none;
-    padding: 14px 28px;
-    border-radius: 6px;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    width: 100%;
-    max-width: 250px;
-}
-
-/* 5. Estructura de Bloque de Totales */
-.contenedor-totales {
-    background-color: var(--light-bg);
-    padding: 20px;
-    border-radius: 8px;
-    border: 1px solid var(--border-color);
-    max-width: 400px;
-    margin-left: auto;
+    gap: 0.4rem;
+    padding: 1rem;
+    background: rgba(248, 250, 252, 0.6);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--borde-suave);
 }
 
 .contenedor-totales p {
     display: flex;
-    justify-content: space-between;
-    margin: 8px 0;
-    color: #475569;
+    justify-content: space-between; /* Texto a la izquierda, dinero a la derecha */
+    margin-bottom: 0;
+    font-size: 0.95rem;
+    color: var(--texto-secundario);
+    border-bottom: 1px dashed var(--borde-suave);
+    padding-bottom: 0.25rem;
 }
 
+.contenedor-totales p strong {
+    color: var(--texto-principal);
+}
+
+/* Ocultación controlada para la reducción dinámica (IVA 8% Turismo) */
+.desglose-iva8 {
+    display: none; /* Tu JavaScript le cambiará el display a 'flex' si la fecha coincide */
+}
+
+/* Bloque destacado para el valor definitivo a pagar */
 .contenedor-totales h3 {
     display: flex;
     justify-content: space-between;
-    border-top: 2px solid var(--dark-bg);
-    padding-top: 12px;
-    margin-top: 12px;
-    color: var(--dark-bg);
-    font-size: 1.3rem;
+    align-items: center;
+    margin-top: 0.5rem !important;
+    font-size: 1.35rem !important;
+    color: var(--color-primario) !important;
+    border-top: 2px solid var(--color-primario);
+    padding-top: 0.75rem;
 }
 
-.desglose-iva8 {
-    color: var(--secondary-color) !important;
-    font-style: italic;
+/* Estilos de botones de interacción inferior */
+.btn-imprimir {
+    display: block;
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    margin-top: 1.5rem;
 }
 
-/* ==========================================================================
-   6. REGLAS ESPECÍFICAS PARA IMPRESIÓN (PRINT CSS)
-   ========================================================================== */
+/* ============================================================
+   4. OPTIMIZACIÓN DE IMPRESIÓN EXCLUSIVA
+   ============================================================ */
 @media print {
-    nav, 
-    hr, 
-    .panel-auxiliar, 
-    .btn-agregar, 
-    .btn-imprimir,
-    th:last-child,
-    td:last-child {
-        display: none !important; /* Oculta controles operativos y menús */
+    /* Ocultar por completo los parámetros de fecha del SRI en el papel */
+    .panel-auxiliar {
+        display: none !important;
     }
-
-    body {
-        background-color: white;
-        padding: 0;
-        font-size: 12pt;
+    
+    /* ¡NUEVA REGLA! Ocultar el botón de imprimir en el papel con máxima prioridad */
+    .btn-imprimir {
+        display: none !important;
     }
-
+    
+    /* Expandir los totales al ancho completo del papel */
     .contenedor-totales {
-        border: none;
-        padding: 0;
-        max-width: 100%;
-    }
-
-    input, select {
-        border: none !important;
+        max-width: none;
         background: transparent !important;
-        appearance: none;
-        -webkit-appearance: none;
+        border: none !important;
         padding: 0 !important;
     }
+    
+    .contenedor-totales p {
+        border-bottom: 1px dashed #000;
+    }
+}
+
+/* Centra el botón de imprimir por completo (ESTO QUEDA IGUAL, FUERA DEL MEDIA PRINT) */
+.btn-imprimir {
+    display: flex !important;
+    margin: 2rem auto 0 auto !important; 
+    justify-content: center;
+    align-items: center;
+    width: fit-content; 
 }
