@@ -699,6 +699,41 @@ main p em {
         margin: 1.5cm 1cm;
         size: A4;
     }
+
+    /* Contenedor del Formulario en Impresión */
+    #formularioCliente {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important; /* Dos columnas perfectas en el papel */
+        gap: 12pt 24pt !important;
+        margin: 15pt 0 !important;
+    }
+
+    /* Alinear cada bloque de etiqueta + valor */
+    #formularioCliente > div {
+        display: flex !important;
+        align-items: baseline !important;
+        gap: 5pt !important;
+    }
+
+    #formularioCliente label {
+        font-weight: bold !important;
+        color: #000000 !important;
+        font-size: 10pt !important;
+        white-space: nowrap !important; /* Evita que la etiqueta se rompa en dos líneas */
+    }
+
+    /* Transformar el input en texto plano impreso */
+    #formularioCliente input {
+        border: none !important;
+        border-bottom: 1px dotted #666666 !important; /* Línea de puntos elegante debajo del dato */
+        background: transparent !important;
+        padding: 0 0 2pt 0 !important;
+        color: #000000 !important;
+        font-size: 10pt !important;
+        font-family: inherit !important;
+        width: 100% !important;
+        box-shadow: none !important;
+    }
 }
 
 /* ============================================================
