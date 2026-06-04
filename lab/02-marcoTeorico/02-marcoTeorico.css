@@ -45,24 +45,36 @@
 
 .resultado-flujo {
     margin-top: 12px;
-    padding: 12px;
+    padding: 16px; /* 🔥 clave: aire interno */
     background: white;
     border-radius: 6px;
     border-left: 4px solid #198754;
+    overflow-x: auto;
 }
 
+.resultado-flujo {
+    margin-top: 12px;
+   
+    padding: 16px 14px; /* equilibrio visual horizontal */
+}
 .resultado-tabla {
     width: 100%;
+    max-width: 100%;
     border-collapse: collapse;
     font-size: 0.95rem;
+    table-layout: fixed; /* 🔥 clave para evitar overflow */
 }
 
-.resultado-tabla th, .resultado-tabla td {
-    padding: 6px 10px;
-    text-align: left;
-    border-bottom: 1px solid #e9ecef;
+.resultado-tabla td,
+.resultado-tabla th {
+    word-wrap: break-word;
+    white-space: normal;
 }
-
+@media (max-width: 768px) {
+    .resultado-tabla {
+        font-size: 0.85rem;
+    }
+}
 .resultado-tabla tr:last-child td { font-weight: bold; border-bottom: none; }
 .resultado-tabla tr:last-child td:last-child { color: #198754; }
 
@@ -80,7 +92,7 @@
     padding: 12px;
     margin-bottom: 12px;
     border-radius: 6px;
-    background-color: #ffffff;
+    background-color: #ffffff; 
 }
 
 .item-contenedor legend {
@@ -113,4 +125,129 @@
     display: block;
     margin-top: 8px;
     font-size: 0.8rem;
+}
+
+/* ====== CONTENEDORES MÁS ROBUSTOS ====== */
+.calc-form {
+    max-width: 520px; /* antes 400px */
+    width: 100%;
+}
+
+/* Evita que tablas rompan el layout */
+.resultado-flujo {
+    overflow-x: auto;
+}
+
+/* Tabla responsive real */
+.resultado-tabla {
+    width: 100%;
+    min-width: 320px;
+}
+
+/* Mejora general de los details */
+.subtema {
+    max-width: 900px;
+}
+
+/* Evita overflow en todo el sistema de tablas */
+table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+/* Evita que cualquier contenido se salga del details */
+.subtema {
+    max-width: 100%;
+    overflow-x: auto;
+    box-sizing: border-box;
+}
+
+/* Contenedor de tablas más robusto */
+.resultado-flujo {
+    overflow-x: auto;
+    width: 100%;
+}
+
+/* ==========================================================================
+   ESTADOS DINÁMICOS PARA EL TEST (MAQUETACIÓN LIMPIA SINFÍN)
+   ========================================================================== */
+
+/* Estados de las tarjetas de preguntas */
+.pregunta-tarjeta {
+    background: #ffffff;
+    padding: 24px;
+    border-radius: 8px;
+    border: 1px solid #cbd5e1;
+    border-left: 6px solid #cbd5e1;
+    width: 100%;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+.tarjeta-correcto {
+    border-left-color: #10b981 !important; /* Verde SRI */
+}
+
+.tarjeta-incorrecto {
+    border-left-color: #ef4444 !important; /* Rojo Error */
+}
+
+.tarjeta-advertencia {
+    border-left-color: #eab308 !important; /* Amarillo Omisión */
+}
+
+.tarjeta-opinion {
+    border-left-color: #2563eb !important; /* Azul Institucional */
+}
+
+/* Formato para los bloques de retroalimentación individuales */
+.retro-bloque {
+    margin-top: 14px;
+    padding: 12px;
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 1.05rem;
+}
+
+.retro-correcto {
+    background-color: #dcfce7;
+    color: #14532d;
+}
+
+.retro-incorrecto {
+    background-color: #fee2e2;
+    color: #7a1515;
+}
+
+.retro-advertencia {
+    background-color: #fef9c3;
+    color: #713f12;
+}
+
+.retro-opinion {
+    background-color: #eff6ff;
+    color: #1e40af;
+}
+
+/* Tablero consolidado de resultados finales */
+.panel-kpi-global {
+    display: block;
+    padding: 24px;
+    border-radius: 8px;
+    font-size: 1.15rem;
+    line-height: 1.6;
+    margin-top: 16px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.panel-aprobado {
+    border-left: 6px solid #10b981;
+    background-color: #f0fdf4;
+}
+
+.panel-reprobado {
+    border-left: 6px solid #ef4444;
+    background-color: #fef2f2;
 }

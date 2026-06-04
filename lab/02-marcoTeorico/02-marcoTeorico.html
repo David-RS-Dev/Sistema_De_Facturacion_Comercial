@@ -1,4 +1,3 @@
-<!-- 02-marcoTeorico.html -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -25,11 +24,9 @@
 
     <main>
 
-        <!-- ================= TEMA 1 ================= -->
         <details class="tema-principal">
             <summary>Tema 1: Productos gravados con IVA</summary>
             <div class="contenedor-subtemas">
-                
                 <details class="subtema">
                     <summary>📖 Concepto</summary>
                     <p>Los productos gravados con IVA son aquellos bienes o servicios que están sujetos al pago del Impuesto al Valor Agregado (IVA). Este impuesto se aplica sobre el precio de venta y debe ser cobrado por el negocio al momento de realizar una transacción comercial. En Ecuador, el IVA es administrado por el Servicio de Rentas Internas (SRI), y su porcentaje puede variar según la normativa vigente.</p>
@@ -77,27 +74,19 @@
                     </table>
                 </details>
 
-                 <!-- PRÁCTICA INTERACTIVA -->
                 <details class="subtema calculadora">
                     <summary>🧮 Práctica Interactiva</summary>
                     <form class="calc-form" id="calc-tema1" onsubmit="event.preventDefault();">
                         <div class="input-group">
                             <label for="precio-tema1">Precio base ($):</label>
-                            <input type="number" id="precio-tema1" 
-                            step="0.01" min="0" placeholder="Ej: 800" required>
+                            <input type="number" id="precio-tema1" step="0.01" min="0" placeholder="Ej: 800" required>
                         </div>
                         <div class="input-group">
-                            <label for="tasa-tema1">
-                                Tasa IVA (%):
-                            </label>
-                            <input type="number" id="tasa-tema1" 
-                            step="0.01" min="0" max="100" value="15" required>
+                            <label for="tasa-tema1">Tasa IVA (%):</label>
+                            <input type="number" id="tasa-tema1" step="0.01" min="0" max="100" value="15" required>
                         </div>
-                        <button type="button" id="btn-calc-tema1" class="btn-calcular">
-                            Calcular
-                        </button>
-                        <div class="resultado-flujo" id="res-tema1" aria-live="polite">
-                        </div>
+                        <button type="button" id="btn-calc-tema1" class="btn-calcular">Calcular</button>
+                        <div class="resultado-flujo" id="res-tema1" aria-live="polite"></div>
                     </form>
                 </details>
 
@@ -106,16 +95,14 @@
                     <p><strong>Importancia:</strong> Los productos gravados generan ingresos tributarios para el Estado y permiten financiar servicios públicos, infraestructura y programas sociales.</p>
                     <p><strong>Conclusión:</strong> Los productos gravados con IVA forman parte fundamental del sistema tributario, ya que permiten recaudar impuestos sobre las actividades comerciales y económicas realizadas dentro del país.</p>
                 </details>
-
             </div>
         </details>
+
         <hr>
 
-        <!-- ================= TEMA 2 ================= -->
         <details class="tema-principal">
             <summary>Tema 2: Productos Tarifa 0%</summary>
             <div class="contenedor-subtemas">
-                
                 <details class="subtema">
                     <summary>📖 Concepto</summary>
                     <p>Los productos tarifa 0% son bienes y servicios que no pagan IVA, aunque sí deben registrarse en las facturas y declaraciones tributarias. Estos productos son considerados de primera necesidad o estratégicos para la economía y la población.</p>
@@ -163,29 +150,19 @@
                     </table>
                 </details>
 
-                 <!-- PRÁCTICA INTERACTIVA -->
                 <details class="subtema calculadora">
                     <summary>🧮 Práctica Interactiva</summary>
                     <form class="calc-form" id="calc-tema2" onsubmit="event.preventDefault();">
                         <div class="input-group">
-                            <label for="precio-tema2">
-                                Precio del producto ($):
-                            </label>
-                            <input type="number" id="precio-tema2" 
-                            step="0.01" min="0" placeholder="Ej: 45" required>
+                            <label for="precio-tema2">Precio del producto ($):</label>
+                            <input type="number" id="precio-tema2" step="0.01" min="0" placeholder="Ej: 45" required>
                         </div>
                         <div class="input-group">
-                            <label for="tasa-tema2">
-                                Tasa IVA (%):
-                            </label>
-                            <input type="number" id="tasa-tema2" value="0" 
-                            readonly class="input-bloqueado">
+                            <label for="tasa-tema2">Tasa IVA (%):</label>
+                            <input type="number" id="tasa-tema2" value="0" readonly class="input-bloqueado">
                         </div>
-                        <button type="button" id="btn-calc-tema2" class="btn-calcular">
-                            Calcular
-                        </button>
-                        <div class="resultado-flujo" id="res-tema2" aria-live="polite">
-                        </div>
+                        <button type="button" id="btn-calc-tema2" class="btn-calcular">Calcular</button>
+                        <div class="resultado-flujo" id="res-tema2" aria-live="polite"></div>
                     </form>
                 </details>
 
@@ -196,16 +173,14 @@
                         <li><strong>Exento:</strong> no genera obligación tributaria específica.</li>
                     </ul>
                 </details>
-
             </div>
         </details>
+
         <hr>
 
-        <!-- ================= TEMA 3 ================= -->
         <details class="tema-principal">
             <summary>Tema 3: Subtotal</summary>
             <div class="contenedor-subtemas">
-                
                 <details class="subtema">
                     <summary>📖 Concepto</summary>
                     <p>El subtotal es el valor de los productos o servicios antes de agregar impuestos, descuentos o recargos. Representa el costo base de una compra.</p>
@@ -236,11 +211,9 @@
                     </table>
                 </details>
 
-                <!-- PRÁCTICA INTERACTIVA TEMA 3 -->
                 <details class="subtema calculadora">
                     <summary>🧮 Práctica Interactiva: Calcular Subtotal</summary>
                     <form class="calc-form" id="calc-tema3" onsubmit="event.preventDefault();">
-                        
                         <fieldset class="item-contenedor">
                             <legend>📦 Item 1 (Ej: Camisas)</legend>
                             <div class="inputs-paralelos">
@@ -269,12 +242,8 @@
                             </div>
                         </fieldset>
 
-                        <button type="button" id="btn-calc-tema3" class="btn-calcular">
-                            Calcular Subtotal
-                        </button>
-                        
-                        <div class="resultado-flujo" id="res-tema3" aria-live="polite">
-                        </div>
+                        <button type="button" id="btn-calc-tema3" class="btn-calcular">Calcular Subtotal</button>
+                        <div class="resultado-flujo" id="res-tema3" aria-live="polite"></div>
                     </form>
                 </details>
 
@@ -283,16 +252,14 @@
                     <p><strong>Importancia:</strong> El subtotal sirve como base para calcular el IVA, descuentos, retenciones y el total final.</p>
                     <p><strong>Conclusión:</strong> Es un elemento fundamental dentro de cualquier factura, ya que representa el valor real de la compra antes de aplicar impuestos u otros cálculos financieros.</p>
                 </details>
-
             </div>
         </details>
+
         <hr>
 
-        <!-- ================= TEMA 4 ================= -->
         <details class="tema-principal">
             <summary>Tema 4: IVA</summary>
             <div class="contenedor-subtemas">
-                
                 <details class="subtema">
                     <summary>📖 Concepto</summary>
                     <p>El IVA (Impuesto al Valor Agregado) es un tributo aplicado sobre la venta de bienes y servicios. El vendedor cobra el impuesto al cliente y luego lo declara al SRI.</p>
@@ -330,20 +297,34 @@
                     </ul>
                 </details>
 
+                <details class="subtema calculadora">
+                    <summary>⊕ Práctica Interactiva: Calcular IVA</summary>
+                    <form class="calc-form" id="calc-tema4" onsubmit="event.preventDefault();">
+                        <div class="input-group">
+                            <label>Subtotal ($):</label>
+                            <input type="number" id="subtotal-tema4" step="0.01" min="0">
+                        </div>
+                        <div class="input-group">
+                            <label>Tasa IVA (%):</label>
+                            <input type="number" id="iva-tema4" value="15" min="0">
+                        </div>
+                        <button type="button" id="btn-calc-tema4" class="btn-calcular">Calcular IVA</button>
+                        <div class="resultado-flujo" id="res-tema4"></div>
+                    </form>
+                </details>
+
                 <details class="subtema">
                     <summary>📌 Conclusión</summary>
                     <p>El IVA es uno de los impuestos más importantes en la economía, ya que grava el consumo de bienes y servicios y constituye una fuente principal de ingresos fiscales para el Estado.</p>
                 </details>
-
             </div>
         </details>
+
         <hr>
 
-        <!-- ================= TEMA 5 ================= -->
         <details class="tema-principal">
             <summary>Tema 5: Total Factura</summary>
             <div class="contenedor-subtemas">
-                
                 <details class="subtema">
                     <summary>📖 Concepto</summary>
                     <p>El total factura es el valor final que debe pagar el cliente después de sumar impuestos y restar descuentos. Representa el monto legal y oficial de una transacción comercial.</p>
@@ -373,23 +354,154 @@
                     </table>
                 </details>
 
+                <details class="subtema calculadora">
+                    <summary>⊕ Práctica Interactiva: Total Factura</summary>
+                    <form class="calc-form" id="calc-tema5" onsubmit="event.preventDefault();">
+                        <div class="input-group">
+                            <label>Subtotal ($):</label>
+                            <input type="number" id="subtotal-t5">
+                        </div>
+                        <div class="input-group">
+                            <label>IVA ($):</label>
+                            <input type="number" id="iva-t5">
+                        </div>
+                        <div class="input-group">
+                            <label>Descuento ($):</label>
+                            <input type="number" id="desc-t5" value="0">
+                        </div>
+                        <button type="button" id="btn-calc-tema5" class="btn-calcular">Calcular Total</button>
+                        <div class="resultado-flujo" id="res-tema5"></div>
+                    </form>
+                </details>
+
                 <details class="subtema">
                     <summary>📌 Importancia y Conclusión</summary>
                     <p><strong>Importancia:</strong> El total factura resume el monto definitivo a pagar y permite registrar correctamente las operaciones económicas y tributarias.</p>
                     <p><strong>Conclusión:</strong> Es el valor legal de la transacción y debe coincidir exactamente con el monto entregado o transferido por el cliente.</p>
                 </details>
+            </div>
+        </details>
 
+        <details class="tema-principal evaluacion-seccion">
+            <summary class="summary-principal">
+                <span class="summary-contenido">Evaluación de Conocimientos Tributarios</span>
+            </summary>
+
+            <div class="contenedor-subtemas">
+                <div class="contenido-subtema">
+                    <p class="instrucciones-test" style="margin-bottom: 24px; color: #475569; font-size: 1.1rem;">
+                        Seleccione la opción correcta para cada una de las siguientes preguntas y presione el botón de cálculo final para verificar sus resultados.
+                    </p>
+
+                    <form id="testTributarioForm" onsubmit="event.preventDefault();" style="display: flex; flex-direction: column; gap: 20px; width: 100%;">
+
+                        <div class="pregunta-tarjeta" style="background: #ffffff; padding: 20px; border-radius: 8px; border: 1px solid #cbd5e1; border-left: 4px solid #2563eb; width: 100%; box-sizing: border-box;">
+                            <p class="pregunta-enunciado" style="font-size: 1.1rem; font-weight: 600; color: #0f172a; margin-top: 0; margin-bottom: 16px;">
+                                Datos del estudiante
+                            </p>
+
+                            <div class="input-group">
+                                <label for="nombreEncuesta">Nombre:</label>
+                                <input type="text" id="nombreEncuesta" required>
+                            </div>
+
+                            <div class="input-group">
+                                <label for="correoEncuesta">Correo:</label>
+                                <input type="email" id="correoEncuesta" required>
+                            </div>
+                        </div>
+
+                        <div class="pregunta-tarjeta" id="bloque-p1" style="background: #ffffff; padding: 20px; border-radius: 8px; border: 1px solid #cbd5e1; border-left: 4px solid #cbd5e1; width: 100%; box-sizing: border-box;">
+                            <p class="pregunta-enunciado" style="font-size: 1.1rem; font-weight: 600; color: #0f172a; margin-top: 0; margin-bottom: 16px;">
+                                1. ¿Qué entidad se encarga de administrar el Impuesto al Valor Agregado (IVA) en Ecuador?
+                            </p>
+                            <label><input type="radio" name="p1" value="A"> A) El Ministerio de Finanzas</label><br>
+                            <label><input type="radio" name="p1" value="B"> B) El Banco Central del Ecuador</label><br>
+                            <label><input type="radio" name="p1" value="C"> C) El Servicio de Rentas Internas (SRI)</label><br>
+                            <label><input type="radio" name="p1" value="D"> D) La Superintendencia de Bancos</label>
+                            <div class="retroalimentacion-texto" id="retro-p1"></div>
+                        </div>
+
+                        <div class="pregunta-tarjeta" id="bloque-p2" style="background: #ffffff; padding: 20px; border-radius: 8px; border: 1px solid #cbd5e1; border-left: 4px solid #cbd5e1; width: 100%; box-sizing: border-box;">
+                            <p class="pregunta-enunciado" style="font-size: 1.1rem; font-weight: 600; color: #0f172a; margin-top: 0; margin-bottom: 16px;">
+                                2. ¿Por qué se aplica la tarifa 0% de IVA a ciertos bienes y servicios?
+                            </p>
+                            <label><input type="radio" name="p2" value="A"> A) Porque son productos importados de lujo.</label><br>
+                            <label><input type="radio" name="p2" value="B"> B) Porque se consideran de primera necesidad o estratégicos.</label><br>
+                            <label><input type="radio" name="p2" value="C"> C) Porque están exentos de registrarse en las facturas.</label><br>
+                            <label><input type="radio" name="p2" value="D"> D) Porque son servicios digitales extranjeros.</label>
+                            <div class="retroalimentacion-texto" id="retro-p2"></div>
+                        </div>
+
+                        <div class="pregunta-tarjeta" id="bloque-p3" style="background: #ffffff; padding: 20px; border-radius: 8px; border: 1px solid #cbd5e1; border-left: 4px solid #cbd5e1; width: 100%; box-sizing: border-box;">
+                            <p class="pregunta-enunciado" style="font-size: 1.1rem; font-weight: 600; color: #0f172a; margin-top: 0; margin-bottom: 16px;">
+                                3. ¿A qué corresponde el valor del subtotal en una transacción comercial?
+                            </p>
+                            <label><input type="radio" name="p3" value="A"> A) Al costo base de la compra antes de sumar impuestos o aplicar descuentos.</label><br>
+                            <label><input type="radio" name="p3" value="B"> B) Al monto neto final que el cliente debe pagar obligatoriamente.</label><br>
+                            <label><input type="radio" name="p3" value="C"> C) Al porcentaje exacto de recargo por servicios logísticos.</label><br>
+                            <label><input type="radio" name="p3" value="D"> D) Al total de impuestos acumulados durante un periodo fiscal.</label>
+                            <div class="retroalimentacion-texto" id="retro-p3"></div>
+                        </div>
+
+                        <div class="pregunta-tarjeta" id="bloque-p4" style="background: #ffffff; padding: 20px; border-radius: 8px; border: 1px solid #cbd5e1; border-left: 4px solid #cbd5e1; width: 100%; box-sizing: border-box;">
+                            <p class="pregunta-enunciado" style="font-size: 1.1rem; font-weight: 600; color: #0f172a; margin-top: 0; margin-bottom: 16px;">
+                                4. ¿Cuál es el proceso que sigue el vendedor con el IVA recaudado en una venta?
+                            </p>
+                            <label><input type="radio" name="p4" value="A"> A) Lo conserva como ganancia neta de su negocio.</label><br>
+                            <label><input type="radio" name="p4" value="B"> B) Lo transfiere directamente al Banco Central de forma inmediata.</label><br>
+                            <label><input type="radio" name="p4" value="C"> C) Lo cobra al cliente y luego lo declara al SRI.</label><br>
+                            <label><input type="radio" name="p4" value="D"> D) Lo descuenta de sus gastos personales de fin de año.</label>
+                            <div class="retroalimentacion-texto" id="retro-p4"></div>
+                        </div>
+
+                        <div class="pregunta-tarjeta" id="bloque-p5" style="background: #ffffff; padding: 20px; border-radius: 8px; border: 1px solid #cbd5e1; border-left: 4px solid #cbd5e1; width: 100%; box-sizing: border-box;">
+                            <p class="pregunta-enunciado" style="font-size: 1.1rem; font-weight: 600; color: #0f172a; margin-top: 0; margin-bottom: 16px;">
+                                5. ¿Qué representa el total factura en una transacción comercial?
+                            </p>
+                            <label><input type="radio" name="p5" value="A"> A) El costo inicial de producción de un bien.</label><br>
+                            <label><input type="radio" name="p5" value="B"> B) El valor base antes de calcular los tributos.</label><br>
+                            <label><input type="radio" name="p5" value="C"> C) El porcentaje de ganancia neta del comerciante.</label><br>
+                            <label><input type="radio" name="p5" value="D"> D) El valor final que paga el cliente tras sumar impuestos y restar descuentos.</label>
+                            <div class="retroalimentacion-texto" id="retro-p5"></div>
+                        </div>
+
+                        <div class="pregunta-tarjeta" id="bloque-p6" style="background: #ffffff; padding: 20px; border-radius: 8px; border: 1px solid #cbd5e1; border-left: 4px solid #3b82f6; width: 100%; box-sizing: border-box;">
+                            <p class="pregunta-enunciado" style="font-size: 1.1rem; font-weight: 600; color: #0f172a; margin-top: 0; margin-bottom: 8px;">
+                                6. ¿Qué le pareció la plataforma y el contenido interactivo presentado?
+                            </p>
+
+                            <select id="opinionEscala" style="width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 1.05rem; background-color: #f8fafc;">
+                                <option value="">-- Seleccione una valoración --</option>
+                                <option value="excelente">Excelente - Muy intuitivo y claro</option>
+                                <option value="bueno">Bueno - Ayuda a comprender los conceptos</option>
+                                <option value="regular">Regular - Requiere mayor profundidad teórica</option>
+                                <option value="malo">Deficiente - Difícil de comprender u operar</option>
+                            </select>
+
+                            <div class="retroalimentacion-texto" id="retro-p6"></div>
+                        </div>
+
+                        <button type="button" id="btnCalificarTest" class="btn-calcular" onclick="ejecutarValidacionFiscal(event)">
+                            Calcular Calificación General
+                        </button>
+
+                        <div id="resultadoGlobalTest"></div>
+
+                    </form>
+                </div>
             </div>
         </details>
 
     </main>
+
     <hr>
 
     <footer>
-        <p>© 2026 - Proyecto Sistema de Facturación Comercial</p>
+        <p>©️ 2026 - Proyecto Sistema de Facturación Comercial</p>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="02-marcoTeorico.js"></script>
 </body>
 </html>
-<!-- 123 -->
