@@ -139,13 +139,15 @@ function iniciarCalculadoraTema4() {
         }
 
         var iva = subtotal * (tasa / 100);
+        var total = subtotal + iva
 
         document.getElementById("res-tema4").innerHTML =
             '<table class="resultado-tabla">' +
-            '<tbody>' +
-            '<tr><td>Subtotal</td><td>$' + subtotal.toFixed(2) + '</td></tr>' +
-            '<tr><td>IVA</td><td>$' + iva.toFixed(2) + '</td></tr>' +
-            '</tbody>' +
+                '<tbody>' +
+                    '<tr><td>Subtotal</td><td>$' + subtotal.toFixed(2) + '</td></tr>' +
+                    '<tr><td>IVA</td><td>$' + iva.toFixed(2) + '</td></tr>' +
+                    '<tr><td>Total a pagar (subtotal + iva)</td><td>$' + total.toFixed(2) + '</td></tr>' +
+                '</tbody>' +
             '</table>';
     });
 }
