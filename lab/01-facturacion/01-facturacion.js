@@ -10,6 +10,7 @@ const baseDatosProductos = [
 
 // Matriz de Feriados Nacionales en formato ISO
 const feriadosActivos = [
+    "2026-01-01", // Año Nuevo
     "2026-05-24", // Batalla de Pichincha
     "2026-08-10", // Primer Grito de Independencia
     "2026-11-02", // Día de los Difuntos
