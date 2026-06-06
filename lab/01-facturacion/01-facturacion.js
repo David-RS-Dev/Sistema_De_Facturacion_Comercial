@@ -4,11 +4,13 @@ const baseDatosProductos = [
     { id: "P002", descripcion: "Almuerzo Turístico / Gastronomía Autorizada", precio: 12.50, aplicaIvaReducido: true },
     { id: "P003", descripcion: "Tour Operado Centro Histórico Quito", precio: 25.00, aplicaIvaReducido: true },
     { id: "P004", descripcion: "Bebida Energizante Importada", precio: 3.50, aplicaIvaReducido: false },
-    { id: "P005", descripcion: "Souvenir / Artesanía Local", precio: 15.00, aplicaIvaReducido: false }
+    { id: "P005", descripcion: "Souvenir / Artesanía Local", precio: 15.00, aplicaIvaReducido: false },
+    { id: "P006", descripcion: "Transporte Turístico Autorizado", precio: 18.00, aplicaIvaReducido: true }
 ];
 
 // Matriz de Feriados Nacionales en formato ISO
 const feriadosActivos = [
+    "2026-01-01", // Año Nuevo
     "2026-05-24", // Batalla de Pichincha
     "2026-08-10", // Primer Grito de Independencia
     "2026-11-02", // Día de los Difuntos
