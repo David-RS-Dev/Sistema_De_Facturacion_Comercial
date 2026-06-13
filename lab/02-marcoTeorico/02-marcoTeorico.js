@@ -233,7 +233,11 @@ async function ejecutarValidacionFiscal(event) {
 
     if (resultado.error) {
         console.error(resultado.error);
-        alert("Error al guardar las respuestas en Supabase.");
+        if (resultado.error) {
+    console.error("Error Supabase:", resultado.error);
+    alert("Error Supabase: " + resultado.error.message);
+    return;
+}
         return;
     }
 
